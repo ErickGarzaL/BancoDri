@@ -4,7 +4,9 @@
  */
 package mx.itson.BancoDiftware.ui;
 
+import java.text.NumberFormat;
 import java.util.List;
+import java.util.Locale;
 import javax.swing.table.DefaultTableModel;
 import mx.itson.BancoDiftware.entidades.Operacion;
 import mx.itson.BancoDiftware.persistencia.OperacionDAO;
@@ -220,7 +222,8 @@ public class Inicio extends javax.swing.JFrame {
      * Suma la cantidad que se ingreso al depositar.
      */
     public void llenarUsuario() {
-
+ Locale local = new Locale("es", "MX");
+     NumberFormat formatoMoneda = NumberFormat.getCurrencyInstance(local);
 
         List<Operacion> o = OperacionDAO.obtener();
         DefaultTableModel model = (DefaultTableModel) tblInformacion.getModel();
@@ -233,10 +236,10 @@ public class Inicio extends javax.swing.JFrame {
              
             model.addRow(new Object[]{
                m.getCliente(),
-                m.getSaldoInicial(),
-                m.getSaldoFinal(),
-                m.getTotal(),
-                Deposito
+               formatoMoneda.format(m.getSaldoInicial()),
+               formatoMoneda.format(m.getSaldoFinal()),
+                formatoMoneda.format( m.getTotal()),
+                formatoMoneda.format( Deposito)
                     
                     
 
